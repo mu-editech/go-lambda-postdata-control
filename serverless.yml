@@ -1,0 +1,26 @@
+
+service: go-lambda-post-control
+frameworkVersion: '>=1.28.0 <2.0.0'
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: dev
+  region: ap-northeast-1
+  profile: your-profile
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  go-lambda-post-control:
+    handler: bin/go-lambda-post-control
+    timeout: 300
+    events:
+      - http:
+          path: eventtest
+          method: post
+
